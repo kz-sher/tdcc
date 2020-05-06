@@ -1,22 +1,23 @@
 import * as React from 'react';
-import { View, Text, Button, StyleSheet, StatusBar } from 'react-native';
-import Logo from '../svg/Logo';
+import { View, StyleSheet } from 'react-native';
+import Logo from '../layout/Logo';
 import GoogleButton from '../buttons/GoogleButton';
+import GuestButton from '../buttons/GuestButton';
+import StyledText from '../general/StyledText';
+import Colors from '../../constants/Colors';
 
 const HomeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <StatusBar />
-            <View style={styles.logoContainer}>
+            <View style={styles.logoSection}>
                 <Logo />
             </View>
-            <View style={styles.btnContainer}>
+            <View style={styles.btnSection}>
                 <GoogleButton />
-                {/* <GoogleButton /> */}
-                {/* <Button title='Guest' /> */}
+                <GuestButton />
             </View>
             <View style={styles.copyright}>
-                <Text style={{ color: 'white' }}>Developed By Kz Sherwin</Text>
+                <StyledText style={styles.copyrightTxt}>Developed By Kz Sherwin</StyledText>
             </View>
         </View>
     );
@@ -25,24 +26,24 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        backgroundColor: '#141414',
+        backgroundColor: Colors.bgColor,
     },
-    logoContainer: {
-        // flex: ,
-        height: '50%',
+    logoSection: {
+        flex: 4,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
-    btnContainer: {
-        // flex: 1,
-        height: '30%',
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
+    btnSection: {
+        flex: 2,
+        justifyContent: 'space-evenly'
     },
     copyright: {
-
+        paddingVertical: 15,
+        alignItems: 'center'
+    },
+    copyrightTxt: {
+        fontSize: 8,
+        color: 'white'
     }
 });
 export default HomeScreen;

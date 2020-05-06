@@ -19,11 +19,9 @@ const App = ({ skipLoadingScreen }) => {
                 await Font.loadAsync({
                     ...Ionicons.font,
                     'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-                    'montserrat-thin': require('./assets/fonts/Montserrat/Montserrat-Thin.ttf'),
-                    'montserrat-thinitalic': require('./assets/fonts/Montserrat/Montserrat-ThinItalic.ttf'),
-                    'montserrat-light': require('./assets/fonts/Montserrat/Montserrat-Light.ttf'),
                     'montserrat-lightitalic': require('./assets/fonts/Montserrat/Montserrat-LightItalic.ttf'),
                     'montserrat-regular': require('./assets/fonts/Montserrat/Montserrat-Regular.ttf'),
+                    'montserrat-semibold': require('./assets/fonts/Montserrat/Montserrat-SemiBold.ttf'),
                 });
             } catch (e) {
                 // We might want to provide this error information to an error reporting service
