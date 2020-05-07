@@ -1,9 +1,14 @@
-import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
+import reducers from './reducers';
+
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 const App = ({ skipLoadingScreen }) => {
 
@@ -39,7 +44,9 @@ const App = ({ skipLoadingScreen }) => {
         return null;
     } else {
         return (
-            <AppNavigator />
+            <Provider store={store}>
+                <AppNavigator />
+            </Provider>
         );
     }
 }

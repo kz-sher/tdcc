@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import Colors from '../../constants/Colors';
 import StyledText from '../general/StyledText';
 import SquareButton from '../buttons/SquareButton';
 import { CommonActions } from '@react-navigation/native';
 import InputBar from '../layout/InputBar';
+import { setUsername } from '../../actions/auth.action';
 
-const GuestLoginScreen = ({ navigation }) => {
+const GuestLoginScreen = ({ navigation, setUsername }) => {
     const guestId = Math.floor(Math.random() * (500)) + 1;
     const [name, setName] = useState(`guest-${ guestId }-john-doe`);
     const truncateName = name => {
@@ -18,10 +20,11 @@ const GuestLoginScreen = ({ navigation }) => {
         setName(`guest-${ guestId }-${ name }`);
     }
     const handleSubmit = () => {
+        setUsername(name);
         navigation.dispatch(
             CommonActions.reset({
                 index: 1,
-                routes: [{ name: 'Main', params: { username: name } }],
+                routes: [{ name: 'Main' }],
             })
         );
     };
@@ -71,4 +74,4 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.success,
     }
 });
-export default GuestLoginScreen;
+export default connect(null, { setUsername })(GuestLoginScreen);
