@@ -1,14 +1,53 @@
 import React, { useState } from 'react';
-import { View, Button, TextInput, StatusBar, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
+import Collapsible from 'react-native-collapsible';
+import { ScrollView } from 'react-native-gesture-handler';
 import Colors from '../../constants/Colors';
-import StyledText from '../general/StyledText';
-import SquareButton from '../buttons/SquareButton';
+import TitleBar from '../layout/TitleBar';
+import AddNewTaskBar from '../layout/AddNewTaskBar';
+import TaskBar from '../layout/TaskBar';
+import DoneTaskBar from '../layout/DoneTaskBar';
 
-const MainScreen = () => {
+const TASKS = [
+    { title: 'First Item' },
+    { title: 'Second Item' },
+    { title: 'Third Item' },
+];
+
+const COMPLETED = [
+    { title: 'System Design' },
+    { title: 'Planning' },
+];
+
+const MainScreen = ({ navigation }) => {
+    const [taskCollapsed, setTaskCollapsed] = useState(false);
+    const [doneCollapsed, setDoneCollapsed] = useState(false);
+    const handleCollapsed = section => () => {
+        section == 'task' ? setTaskCollapsed(!taskCollapsed) : setDoneCollapsed(!doneCollapsed);
+    }
+    const goTo = name => () => navigation.navigate(name)
+
     return (
-        <View style={styles.container}>
-
-        </View>
+        <ScrollView style={styles.container}>
+            <TitleBar expansible={true} style={styles.titleBar} title='Tasks' handleCollapsed={handleCollapsed('task')} />
+            <AddNewTaskBar icon='add' title='Add New Task' style={styles.actionBar} handlePress={goTo('AddNewTask')} />
+            <Collapsible collapsed={taskCollapsed}>
+                <View style={styles.taskContainer}>
+                    {TASKS.map((item, index) => (
+                        <TaskBar key={index} style={styles.taskBar} title={item.title} handlePress={() => { }} />
+                    ))}
+                </View>
+            </Collapsible>
+            <TitleBar expansible={true} style={styles.titleBar} title='Done' handleCollapsed={handleCollapsed('done')} />
+            <Collapsible collapsed={doneCollapsed}>
+                <View style={styles.taskContainer}>
+                    {COMPLETED.map((item, index) => (
+                        <DoneTaskBar key={index} style={styles.taskBar} title={item.title} handlePress={() => { }} />
+                    ))}
+                </View>
+            </Collapsible>
+            <View style={styles.spacer}></View>
+        </ScrollView>
     )
 }
 
@@ -19,28 +58,20 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingHorizontal: 15,
     },
-    labelSection: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+    titleBar: {
+        marginBottom: 6
     },
-    input: {
-        paddingVertical: 16,
-        marginTop: 14,
-        paddingHorizontal: 6,
-        color: Colors.primary,
-        borderRadius: 5,
-        borderStyle: 'solid',
-        borderWidth: 2,
-        borderColor: Colors.primary,
+    actionBar: {
+        marginBottom: 6,
     },
-    previewName: {
-        paddingHorizontal: 6,
-        fontSize: 10,
+    taskBar: {
+        marginBottom: 6,
     },
-    addGuestBtn: {
-        marginTop: 14,
-        backgroundColor: Colors.success,
+    taskContainer: {
+        marginBottom: 20
+    },
+    spacer: {
+        height: 100
     }
 });
 export default MainScreen;

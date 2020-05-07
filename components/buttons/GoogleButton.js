@@ -7,15 +7,15 @@ import StyledText from '../general/StyledText';
 
 const GoogleButton = () => {
     return (
-        <TouchableOpacity onPress={() => { }} style={styles.btnContainer}>
-            <Icon name='google' style={styles.btnIcon} size={25} />
-            <StyledText weight='semibold' style={styles.btnText}>Login with Google</StyledText>
+        <TouchableOpacity onPress={() => { }} style={styles.container}>
+            <Icon name='google' style={styles.icon} size={25} />
+            <StyledText style={styles.text}>Login with Google</StyledText>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    btnContainer: {
+    container: {
         marginHorizontal: 20,
         paddingVertical: 20,
         height: 'auto',
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 5
     },
-    btnIcon: {
+    icon: {
         color: 'white',
         marginRight: 20
     },
-    btnText: {
+    text: {
         color: 'white'
     }
 });

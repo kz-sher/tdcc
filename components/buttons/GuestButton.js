@@ -8,17 +8,17 @@ import StyledText from '../general/StyledText';
 
 const GuestButton = () => {
     const navigation = useNavigation();
-    const handlePress = () => navigation.navigate('guest-login');
+    const handlePress = () => navigation.navigate('GuestLogin');
     return (
-        <TouchableOpacity onPress={handlePress} style={styles.btnContainer}>
-            <Icon name='person' style={styles.btnIcon} size={25} />
-            <StyledText weight='semibold' style={styles.btnText}>Login as Guest</StyledText>
+        <TouchableOpacity onPress={handlePress} style={styles.container}>
+            <Icon name='person' style={styles.icon} size={25} />
+            <StyledText weight='semibold' style={styles.text}>Login as Guest</StyledText>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    btnContainer: {
+    container: {
         marginHorizontal: 20,
         paddingVertical: 20,
         height: 'auto',
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 5
     },
-    btnIcon: {
+    icon: {
         color: 'white',
         marginRight: 20
     },
-    btnText: {
+    text: {
         color: 'white'
     }
 });

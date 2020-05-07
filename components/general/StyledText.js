@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import Colors from '../../constants/Colors';
 
 const StyledText = (props) => {
-    const weight = props.weight || 'regular';
+    const weight = props.weight || 'semibold';
     const defaultStyles = {
         fontFamily: `montserrat-${ weight }`,
         color: Colors.primary

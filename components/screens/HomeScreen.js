@@ -6,7 +6,7 @@ import GuestButton from '../buttons/GuestButton';
 import StyledText from '../general/StyledText';
 import Colors from '../../constants/Colors';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.logoSection}>
@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
                 <GuestButton />
             </View>
             <View style={styles.copyright}>
-                <StyledText style={styles.copyrightTxt}>Developed By Kz Sherwin</StyledText>
+                <StyledText weight='regular' style={styles.copyrightTxt}>Developed By Kz Sherwin</StyledText>
             </View>
         </View>
     );

@@ -3,9 +3,9 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../../constants/Colors';
 
-const HeaderRight = (props) => {
+const HeaderRight = ({ onPress }) => {
     return (
-        <TouchableOpacity onPress={props.onPress} style={styles.header}>
+        <TouchableOpacity onPress={onPress} style={styles.header}>
             <Icon name='exit-to-app' style={styles.headerIcon} size={28} />
         </TouchableOpacity>
     )
