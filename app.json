@@ -23,7 +23,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "tdcc.ios",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.765503386020-cifek5rcqfhr2hfnjtdqhuhl57rkgq84"
+        }
+      }
     }
   }
 }

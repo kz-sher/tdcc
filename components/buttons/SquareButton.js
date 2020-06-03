@@ -2,11 +2,10 @@ import React from 'react'
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const SquareButton = ({ style = {}, icon = 'add', handlePress }) => {
+const SquareButton = ({ style = {}, icon = 'add', disabled = false, handlePress }) => {
     return (
-        <TouchableOpacity onPress={handlePress} style={[styles.container, style]}>
+        <TouchableOpacity disabled={disabled} onPress={handlePress} style={[styles.container, style]}>
             <Icon name={icon} style={styles.icon} size={25} />
         </TouchableOpacity>
     )

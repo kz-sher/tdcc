@@ -7,7 +7,7 @@ const InputBar = ({ style = {}, placeholder = '', maxLength = 40, multiline = fa
         <TextInput
             onChangeText={handleChange}
             placeholder={placeholder}
-            placeholderTextColor={Colors.primary}
+            placeholderTextColor={Colors.secondary}
             style={[styles.input, style]}
             maxLength={maxLength}
             multiline={multiline}

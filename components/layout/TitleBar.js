@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import StyledText from '../general/StyledText';
 import Colors from '../../constants/Colors';
 
-const TitleBar = ({ style = {}, title, expansible = false, handleCollapsed }) => {
+const TitleBar = ({ style = {}, title, icon = '', handlePress }) => {
     return (
         <View style={[styles.title, style]}>
             <StyledText style={styles.text}>{title}</StyledText>
-            {expansible &&
-                <TouchableOpacity onPress={handleCollapsed}>
-                    <Icon name='chevron-down' style={styles.icon} size={28} />
+            {!!icon &&
+                <TouchableOpacity onPress={handlePress}>
+                    <Icon name={icon} style={styles.icon} size={28} />
                 </TouchableOpacity>
             }
         </View>
@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
         borderRadius: 3
     },
     text: {
+        color: Colors.secondary,
         flex: 1
     },
     icon: {
-        color: Colors.primary,
+        color: Colors.secondary,
     }
 });
 

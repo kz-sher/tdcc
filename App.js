@@ -4,9 +4,13 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
+import * as firebase from 'firebase';
 import { Ionicons } from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers';
+import firebaseConfig from './config/firebase';
+
+firebase.initializeApp(firebaseConfig);
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 

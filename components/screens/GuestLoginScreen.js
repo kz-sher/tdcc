@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { CommonActions } from '@react-navigation/native';
 import Colors from '../../constants/Colors';
 import StyledText from '../general/StyledText';
 import SquareButton from '../buttons/SquareButton';
-import { CommonActions } from '@react-navigation/native';
 import InputBar from '../layout/InputBar';
 import { setUsername } from '../../actions/auth.action';
 
@@ -37,7 +37,7 @@ const GuestLoginScreen = ({ navigation, setUsername }) => {
             </View>
             <InputBar
                 style={styles.input}
-                onChangeText={handleChange}
+                handleChange={handleChange}
                 placeholder='John Doe'
                 maxLength={40}
             />
