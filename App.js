@@ -9,9 +9,10 @@ import { Ionicons } from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
 import reducers from './reducers';
 import firebaseConfig from './config/firebase';
+import OfflineSnackBar from './components/layout/OfflineSnackBar';
+import './fix/setting-timer-bug';
 
 firebase.initializeApp(firebaseConfig);
-
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 const App = ({ skipLoadingScreen }) => {
@@ -50,6 +51,7 @@ const App = ({ skipLoadingScreen }) => {
         return (
             <Provider store={store}>
                 <AppNavigator />
+                <OfflineSnackBar />
             </Provider>
         );
     }

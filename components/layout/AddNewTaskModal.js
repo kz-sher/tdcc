@@ -30,7 +30,7 @@ const AddNewTaskModal = ({ visible, closeModal, addNewTask }) => {
                     placeholder='Untitled'
                     maxLength={100}
                 />
-                <SquareButton style={styles.submitBtn} icon='playlist-add' handlePress={addNewTask(title)} />
+                <SquareButton style={styles.submitBtn} icon='playlist-add' handlePress={() => { console.log('asd'); addNewTask(title)() }} />
             </View>
         </Modal>
     )

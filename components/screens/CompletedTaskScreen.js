@@ -18,7 +18,15 @@ const CompletedTaskScreen = () => {
                 {
                     text: 'Yes',
                     onPress: () => {
-                        firebase.database().ref('/completed').remove();
+                        const ref = firebase.database().ref('/completed');
+                        ref
+                            .orderByChild('count')
+                            .equalTo(0)
+                            .once('value', snapshot => {
+                                snapshot.forEach(childSnapshot => {
+                                    ref.child(childSnapshot.key).remove()
+                                })
+                            });
                     },
                 },
                 {
@@ -30,41 +38,59 @@ const CompletedTaskScreen = () => {
         )
     }
     const revertCompletedTask = task => () => {
-        Alert.alert(
-            `Completed Task - ${ task.title }`,
-            'Are you sure you wanna revert this?',
-            [
-                {
-                    text: 'Yes',
-                    onPress: () => {
-                        firebase.database().ref(`completed/${ task.key }`).remove()
-                        firebase.database().ref(`todos/`).push({ title: task.title })
-                    },
-                },
-                {
-                    text: 'No',
-                    onPress: () => { }
-                }
-            ],
-            { cancelable: false }
-        )
+        firebase.database().ref(`completed/${ task.key }`).transaction(task => {
+            if (task) {
+                task.count = !task.count ? 1 : task.count + 1
+            }
+            return task
+        }, (_, committed, snapshot) => {
+            if (committed && snapshot.val().count === 1) {
+                Alert.alert(
+                    `Completed Task - ${ task.title }`,
+                    'Are you sure you wanna revert this?',
+                    [
+                        {
+                            text: 'Yes',
+                            onPress: () => {
+                                firebase.database().ref(`completed/${ task.key }`).remove()
+                                firebase.database().ref(`todos/`).push({ title: task.title, count: 0 })
+                            },
+                        },
+                        {
+                            text: 'No',
+                            onPress: () => firebase.database().ref(`completed/${ task.key }`).update({ count: 0 })
+                        }
+                    ],
+                    { cancelable: false }
+                )
+            }
+        })
     }
     const deleteCompletedTask = task => () => {
-        Alert.alert(
-            `Completed Task - ${ task.title }`,
-            'Are you sure you wanna delete this?',
-            [
-                {
-                    text: 'Yes',
-                    onPress: () => firebase.database().ref(`completed/${ task.key }`).remove(),
-                },
-                {
-                    text: 'No',
-                    onPress: () => { }
-                }
-            ],
-            { cancelable: false }
-        )
+        firebase.database().ref(`completed/${ task.key }`).transaction(task => {
+            if (task) {
+                task.count += 1;
+            }
+            return task
+        }, (_, committed, snapshot) => {
+            if (committed && snapshot.val().count === 1) {
+                Alert.alert(
+                    `Completed Task - ${ task.title }`,
+                    'Are you sure you wanna delete this?',
+                    [
+                        {
+                            text: 'Yes',
+                            onPress: () => firebase.database().ref(`completed/${ task.key }`).remove(),
+                        },
+                        {
+                            text: 'No',
+                            onPress: () => firebase.database().ref(`completed/${ task.key }`).update({ count: 0 }),
+                        }
+                    ],
+                    { cancelable: false }
+                )
+            }
+        })
     }
 
     useEffect(() => {
@@ -96,6 +122,7 @@ const CompletedTaskScreen = () => {
                                 key={index}
                                 style={styles.taskBar}
                                 title={item.title}
+                                locked={item.count !== 0}
                                 handleRevert={revertCompletedTask(item)}
                                 handleDelete={deleteCompletedTask(item)}
                             />

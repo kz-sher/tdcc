@@ -1,7 +1,6 @@
 import React from 'react'
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const SquareButton = ({ style = {}, icon = 'add', disabled = false, handlePress }) => {
     return (

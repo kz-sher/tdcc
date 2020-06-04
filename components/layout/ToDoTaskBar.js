@@ -10,7 +10,7 @@ const TaskBar = ({ style = {}, title, locked = false, handleComplete, handleEdit
     return (
         <View style={[style, styles.container]}>
             <View style={styles.textContainer}>
-                <TouchableOpacity onPress={handleComplete}>
+                <TouchableOpacity disabled={locked} onPress={handleComplete}>
                     <StyledText>{title}</StyledText>
                 </TouchableOpacity>
             </View>

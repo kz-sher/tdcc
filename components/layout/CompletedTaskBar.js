@@ -6,16 +6,21 @@ import Colors from '../../constants/Colors';
 import SquareButton from '../buttons/SquareButton';
 
 
-const CompletedTaskBar = ({ style = {}, title, handleRevert, handleDelete }) => {
+const CompletedTaskBar = ({ style = {}, locked = false, title, handleRevert, handleDelete }) => {
     return (
         <View style={[style, styles.container]}>
             <View style={styles.textContainer}>
-                <TouchableOpacity onPress={handleRevert}>
+                <TouchableOpacity disabled={locked} onPress={handleRevert}>
                     <StyledText>{title}</StyledText>
                 </TouchableOpacity>
             </View>
-            <SquareButton icon='undo' style={styles.edit} handlePress={handleRevert} />
-            <SquareButton icon='close' style={styles.close} handlePress={handleDelete} />
+            {
+                locked ? <SquareButton icon='lock' disabled={true} style={styles.lock} handlePress={() => { }} />
+                    : <>
+                        <SquareButton icon='undo' style={styles.edit} handlePress={handleRevert} />
+                        <SquareButton icon='close' style={styles.close} handlePress={handleDelete} />
+                    </>
+            }
         </View>
     )
 }
@@ -39,6 +44,9 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flex: 1
+    },
+    lock: {
+        backgroundColor: Colors.primary,
     },
     edit: {
         backgroundColor: Colors.success,

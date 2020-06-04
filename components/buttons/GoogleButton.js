@@ -11,6 +11,7 @@ import { setUsername } from '../../actions/auth.action';
 import googleOAuthClient from '../../config/google-oauth-client';
 
 const IOS_CLIENT_ID = googleOAuthClient.ios.id;
+const ANDROID_CLIENT_ID = googleOAuthClient.android.id;
 const GoogleButton = ({ setUsername }) => {
 
     const navigation = useNavigation();
@@ -18,6 +19,7 @@ const GoogleButton = ({ setUsername }) => {
         try {
             const result = await Google.logInAsync({
                 iosClientId: IOS_CLIENT_ID,
+                androidClientId: ANDROID_CLIENT_ID,
                 scopes: ['profile', 'email']
             });
 
