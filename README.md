@@ -32,12 +32,41 @@ expo install
 ```
 
 ### Step 4
+Create a file for Firebase web app's configuration named `config/firebase.js`. You will need to create an account and a project via Firebase website. After that, copy the firebase web app's configuration from your firebase web sdk snippet. It should look like this:
+
+```js
+module.exports = {
+    apiKey: YOUR-API-KEY,
+    authDomain: YOUR-AUTH-DOMAIN,
+    databaseURL: YOUR-DATABASE-URL,
+    projectId: YOUR-PROJECT-ID,
+    storageBucket: YOUR-STORAGE-BUCKET,
+    messagingSenderId: YOUR-MESSAGING-SENDER-ID,
+    appId: YOUR-APP-ID
+};
+```
+
+### Step 5
+Create a file for Google OAuth Client ID named `config/google-oauth-client.js`. You will need to create client id through Google Developer. After that, copy the ids for iOS and Android to this file. It should look like this:
+
+```js
+module.exports = {
+    ios: {
+        id: GOOGLE-IOS-CLIENT-ID
+    },
+    android: {
+        id: GOOGLE-ANDROID-CLIENT-ID
+    }
+}
+```
+
+### Step 6
 Start Expo Metro Server by issuing:
 ```bash
 expo start
 ```
 
-### Step 5
+### Step 7
 Open TDCC App through Expo Client App by scanning the QR-Code (iOS using Camera/Android using Scanner provided by Expo Client App) shown in the popup page/terminal
 
 # Showcase Images
