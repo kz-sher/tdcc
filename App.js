@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
+import { YellowBox } from 'react-native';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
 import * as firebase from 'firebase';
@@ -18,6 +19,9 @@ const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 const App = ({ skipLoadingScreen }) => {
 
     const [isLoadingComplete, setLoadingComplete] = useState(false);
+
+    // ignore yellow box warning
+    YellowBox.ignoreWarnings(['Warning: React']);
 
     // Load any resources or data that we need prior to rendering the app
     useEffect(() => {
