@@ -19,6 +19,10 @@ TDCC is a classic collaborative to-do mobile application built using `React Nati
 - Real-Time Updates
 
 # Installation & Setup
+You could simply to go https://expo.io/@kzsherdev/tdcc and scan the QR-Code. Make sure you have Expo Client App installed on your mobile device.
+
+Alternatively, you could follow the steps below:
+
 #### Step 1
 Install Expo Client App via Google Play Store (for Android) or App Store (for iOS)
 
